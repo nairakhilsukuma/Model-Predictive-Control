@@ -87,5 +87,21 @@ E_1 and E_2  are the free responses which are the unforced errors and cannot be 
 Δu_f1=〖(〖S_f1〗^T S_f1+W)〗^(-1) 〖S_f1〗^T E_1                                                                                                           
 Δu_f2=〖(〖S_f2〗^T S_f2+W)〗^(-1) 〖S_f2〗^T E_2 
 
+### 7 . Set up of Quadratic constrained dynamic matrix control (QDMC)
+In on-line applications, the moves computed using an LSQ-DMC may not be implementable due to process operating limit violations. 
 
+Three types of process constraints are usually encountered:<br />
+Manipulated variable constraints:  valve saturation. The controller must be able to predict future violations and prescribe moves that would keep these variables within bounds<br />
+Controlled variable constraints: overshoots in the controlled variables past allowable limits must be avoided<br />
+Associated variables: key process variables which are not directly controlled but that must be kept within bounds. 
+The controller must be able to predict future violations and prescribe moves that would keep these variables within bounds.  
+<br />
+
+The least squares objective function used in the DMC implemented earlier can be modified to capture physical system constraints to give it the Quadratic minimization problem form:
+
+min: f_obj=〖〖Δu〗_f^ 〗^T H〖Δu〗_f^ +C^T  〖(〖Δu〗_f^ )〗^   
+H=〖(〖S_f〗^T S_f+W)〗^; 〖〖    C〗^T=(E_^c)〗^T 〖Δu〗_f^ 
+         subject to: 
+Physical hard constraints:   umin  ≤  u(k+1)   ≤umax ;      Formulated as Aqp〖Δu〗_f^ ≤Bqp
+                       Velocity constraints without violation:   〖Δu〗_f^ min  ≤〖   Δu〗_f^   ≤〖  Δu〗_f^ max 
 
