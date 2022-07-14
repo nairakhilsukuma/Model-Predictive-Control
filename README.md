@@ -53,4 +53,11 @@ The value of different predictive output ŷ(k) is initially calculated by the eq
 
 $$\left( ŷ(k)\right) = \left(\sum_{i=1}^{N-1} s_i Δu(k-i) +s_{N}u(k-N)\right)$$
 
-This equation assumes that all step response coefficients which are larger than step N are equivalent to N, which means that the system already reaches steady state. Therefore, part of the equation is simplified to s<sub>N</sub> u(k-N). Besides, the difference between measured output and predictive output is named disturbance
+This equation assumes that all step response coefficients which are larger than step N are equivalent to N, which means that the system already reaches steady state. Therefore, part of the equation is simplified to s<sub>N</sub> u(k-N). Besides, the difference between measured output and predictive output is named disturbance.
+
+$$d(k)=y(k)-ŷ(k)  $$                                                        
+                                                                
+ŷ^c (k+j)=∑_(i=1)^j 〖s_i Δu(k-i+j)〗^ +∑_(i=j+1)^(N-1) 〖s_i Δu(k-i+j) 〗^ +s_N u(k-N+j)+d ̂(k+j)  (7)
+
+Ŷ^c=S_f Δu_f+S_past Δu_past+s_N u_p+d ̂                                                                                                  
+
