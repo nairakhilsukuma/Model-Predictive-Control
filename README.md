@@ -104,4 +104,26 @@ H=〖(〖S_f〗^T S_f+W)〗^; 〖〖    C〗^T=(E_^c)〗^T 〖Δu〗_f^
          subject to: 
 Physical hard constraints:   umin  ≤  u(k+1)   ≤umax ;      Formulated as Aqp〖Δu〗_f^ ≤Bqp
                        Velocity constraints without violation:   〖Δu〗_f^ min  ≤〖   Δu〗_f^   ≤〖  Δu〗_f^ max 
+                      
+The cvxpy package in python is used extensively to hold the QP minimization problem and addition of modified right handed one sided inequality constraints. In the presence of non-minimum phase behavior of controlled and associated variables much improvement in performance is achieved by moving the "constraint window" further down in the horizon. The reason is that any projected violation inside the "constraint window" is handled rigorously by the QP, not unlike a tightly tuned controller. Therefore, if the QP is asked to correct for violations in the earlier projections, severe input moves might be required in the face of non-minimum phase characteristics. 
+Thus, its robust characteristics guarantees reliability of the controller over the whole operating region. 
 
+### 7 . Incorporating Noise in recieved signals from the outputs during step tests:
+A fundamental question about MPC is its robustness to model uncertainty and noise. When we say that a control system is robust we mean that stability is maintained and that the performance specifications are met for a specified range of model variations and a class of noise signals (uncertainty range). To be meaningful, any statement about “robustness” of a particular control algorithm must make reference to a specific uncertainty range.
+In our application of real time data we assume that the noise inserted into the system is Gaussian with specific outliers to capture the noisy sensor data available from industrial setups and the failure to ensure that the system remains undisturbed while gathering the step test data.
+### A standard Gaussian random variable w takes values over the real line and has the probability density function:
+〖noise〗_sp=1/√(2π σ〖^2〗) exp(〖(x-μ)〗^2/(2σ〖^2〗))+vsp
+
+### 8 . Extended Kalman Filters (EKF)
+A Kalman filter estimates $x_t$ by solving the optimization problem
+
+\begin{array}{ll}
+\mbox{minimize} & \sum_{t=0}^{N-1} \left( 
+\|w_t\|_2^2 + \tau \|v_t\|_2^2\right)\\
+\mbox{subject to} & x_{t+1} = Ax_t + Bw_t,\quad t=0,\ldots, N-1\\
+& y_t = Cx_t+v_t,\quad t = 0, \ldots, N-1,
+\end{array}
+
+where $\tau$ is a tuning parameter. This problem is actually a least squares problem, and can be solved via linear algebra, without the need for more general convex optimization. Note that since we have no observation $y_{N}$, $x_N$ is only constrained via $x_{N} = Ax_{N-1} + Bw_{N-1}$, which is trivially resolved when $w_{N-1} = 0$ and $x_{N} = Ax_{N-1}$. We maintain this vestigial constraint only because it offers a concise problem statement.
+
+### 9 . Extended Kalman Filters (EKF)
