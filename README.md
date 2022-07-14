@@ -59,5 +59,5 @@ $$d(k)=y(k)-ŷ(k)  $$
                                                                 
 $$\left( ŷ^c (k+j)\right)=\left(\sum_{i=1}^{j} s_i Δu(k-i+j) +\sum_{i=j+1}^{N-1}s_i Δu(k-i+j) + s_N u(k-N+j)+d ̂(k+j)\right)$$
 
-Ŷ^c=S_f Δu_f+S_past Δu_past+s_N u_p+d ̂                                                                                                  
+$$\left( Ŷ^c=S_f Δu_f+S_past Δu_past+s_N u_p+d \right)$$ ̂                                                                                                  
 
