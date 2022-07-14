@@ -47,7 +47,8 @@ found either by solving the ODE's simultaneously for points where derivatives ar
 To check whether the system is controllable in a non minimum phase environment by fixing h_3 and  h_4 the control (ctrl) package in python was used which required as its input the φ and Γ matrices and returned a full rank controllability matrix ensuring that the system is observable and controllable.
 Minimum phase systems are those which have zero poles in the transfer function dynamics while finding the gain matrix. (Denominator zero) and are inherently very unstable.
 
-### 6 .  Setting up the Controller
+### 6 .  Setting up the LSQ-DMC
+
 
 The value of different predictive output ŷ(k) is initially calculated by the equation: <br />
 
@@ -59,5 +60,32 @@ $$d(k)=y(k)-ŷ(k)  $$
                                                                 
 $$\left( ŷ^c (k+j)\right)=\left(\sum_{i=1}^{j} s_i Δu(k-i+j) +\sum_{i=j+1}^{N-1}s_i Δu(k-i+j) + s_N u(k-N+j)+d ̂(k+j)\right)$$
 
-$$\left( Ŷ^c=S_f Δu_f+S_past Δu_past+s_N u_p+d \right)$$ ̂                                                                                                  
+$$\left( Ŷ^c=S_f Δu_f+S_past Δu_past+s_N u_p+d \right)$$ ̂
+
+Part of the equation is simplified to s_N u(k-N). Besides, the difference between measured output and predictive output is named disturbance, as shown in Equation (6), assuming the disturbance is constant at different times. And the “corrected predictive” output is equal to the disturbance added to the model prediction output ŷ(k).
+
+ In which 
+ 
+<p align = "center">
+ Ŷ<sup>c</sup>  =  Corrected predicted output <br /> S<sub>f</sub> Δu<sub>f</sub>  = Effect of current or future control moves<br />S<sub>past</sub> Δu<sub>past</sub> +  s<sub>N</sub> u<sub>p</sub>= Effect of past control moves <br />d ̂ = Predicted disturbances}
+</p>
+
+〖ŷ_1^  (k)〗^ =S_f11 Δu_f1+S_f12 Δu_f2+S_past11 Δu_past1 〖+S〗_past12 Δu_past2+s_N11 u_p1+s_N12 u_p2                  
+〖ŷ_2^  (k)〗^ =S_f21 Δu_f1+S_f22 Δu_f2+S_past21 Δu_past1 〖+S〗_past22 Δu_past2+s_N21 u_p1 〖+s〗_N22 u_p2                    
+E_1=r_1-[S_past11 Δu_past1 〖+S〗_past12 Δu_past2+s_N11 u_p1  +s_N12 u_p2+d ̂_1]      
+E_2=r_2-[S_past21 Δu_past1 〖+S〗_past22 Δu_past2+s_N21 u_p2  +s_N22 u_p2+d ̂_2]          
+
+We initialize input vector, output vector, state vectors, past inputs, predicted disturbance, error and predicted output. Since the system started from the steady state, it is necessary to initialize the two input vectors to the first pump volumetric flow rate and the second pump volumetric flow rate respectively. The same work should be applied to the state vectors, output vectors and all of the above matrices. All vectors should be multiplied by the initial steady state values, except that the error and predicted disturbance are initialized to zero. 
+
+The final step is to set a for loop for dynamic matrix control. The objective function is defined as the sum of the squares of the predicted errors on the first and the second output respectively, and the control moves with the first input and the second input respectively.
+
+The quadratic terms in objective function is written in a matrix-vector form:
+f_obj=∑_(i=1)^P 〖(r_1 (k+i)-ŷ_1^c (k+i))〗^2+∑_(i=1)^P 〖〖(r〗_2 (k+i)-ŷ_2^c (k+i))〗^2+w∑_(i=0)^(M-1) 〖(Δu_1 (k+i))〗^2+w∑_(i=0)^(M-1) 〖(Δu_2 (k+i))〗^2           
+f_obj=〖(E_1^c)〗^T E_1^c+〖〖(E_2^c)〗^T E_2^c〗_^  +〖(〖Δu〗_f1^ )〗^T W〖Δu〗_f1^ +〖(〖Δu〗_f2^ )〗^T W〖Δu〗_f2^                                                        
+The objective function is differentiated with Δu_f1 and Δu_f2 respectively and then set to zero. 
+E_1 and E_2  are the free responses which are the unforced errors and cannot be changed.  In the for loop, it is also necessary to update the error and input past (Upast) information as for loop number increases. When the for loop finishes, MSE is calculated to verify the DMC control effect. 
+Δu_f1=〖(〖S_f1〗^T S_f1+W)〗^(-1) 〖S_f1〗^T E_1                                                                                                           
+Δu_f2=〖(〖S_f2〗^T S_f2+W)〗^(-1) 〖S_f2〗^T E_2 
+
+
 
