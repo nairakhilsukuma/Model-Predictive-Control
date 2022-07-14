@@ -1,7 +1,7 @@
  # Model Predictive Control
  #### Comparisons of LSQ DMC, QDMC, Constrained QDMC, Robust constrained QDMC and Neural MPC
 
-*The inspiration for this repo originated from the course - Process Systems Modelling taught by Professor Fernando Lima at Carnegie Mellon University in the Spring of 2022 and later with the Non Linear Programming Course by Professor Lorenz T Biegler in Fall 2022. The idea grew outside the course, at which it was a much simplified version and I am thankful to my teachers for instilling within me his trust and guiding me in my endeavour even outside the classroom.*
+*The inspiration for this repo originated from the course - Process Systems Modelling taught by Professor Fernando Lima at Carnegie Mellon University in the Spring of 2022 and later with the Non Linear Programming Course by Professor Lorenz T Biegler in Fall 2022. The idea grew outside the course, at which it was a much simplified version and I am thankful to my teachers for instilling within me their trust and guiding me in my endeavour even outside the classroom.*
 
 The optimal control design of systems is an important problem of control theory. A powerful way of investigating this problem is to use model predictive controllers (MPCs) which are known to be popular in many fields of applications (Qin and Badgwell, 2003).
 
