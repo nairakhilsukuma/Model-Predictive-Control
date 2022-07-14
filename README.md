@@ -1,5 +1,5 @@
  # Model Predictive Control
- ### Comparisons of LSQ DMC, QDMC, Constrained QDMC, Robust constrained QDMC and Neural MPC
+ #### Comparisons of LSQ DMC, QDMC, Constrained QDMC, Robust constrained QDMC and Neural MPC
 
 *The inspiration for this repo originated from the course - Process Systems Modelling taught by Professor Fernando Lima at Carnegie Mellon University in the Spring of 2022. The idea grew outside the course, at which it was a much simplified version and I am thankful to him for instilling within me his trust and guiding me in my endeavour even outside the classroom.*
 
