@@ -1,0 +1,21 @@
+theme:
+  fonts:
+    display: "Fraunces"
+    body: "Space Grotesk"
+  colors:
+    background: "#F8FAFC"
+    surface: "#FFFFFF"
+    surface_alt: "#F1F5F9"
+    text: "#0F172A"
+    muted: "#475569"
+    border: "#DCE3EA"
+    primary: "#0F766E"
+    primary_soft: "#DFF7F3"
+    accent: "#C97812"
+    accent_soft: "#FFF3E3"
+    hero_from: "#12766F"
+    hero_to: "#D58922"
+  radii:
+    xl: "28px"
+    lg: "22px"
+    md: "16px"

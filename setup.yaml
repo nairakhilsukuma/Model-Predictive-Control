@@ -1,0 +1,39 @@
+mpc_model:
+  a1: 2.3
+  a2: 2.3
+  a3: 2.3
+  a4: 2.3
+
+  A1: 730
+  A2: 730
+  A3: 730
+  A4: 730
+
+  h1_0: 14.1839
+  h2_0: 11.25046
+  h3_0: 21.0841
+  h4_0: 31.0452
+
+  k1: 5.51
+  k2: 5.58
+  g: 981
+
+  gamma1: 0.6
+  gamma2: 0.6
+
+  v1: 30 #120
+  v2: 25
+
+mpc_parameters:
+  P: 6 # prediction horizon
+  M: 5 # control horizon
+  N: 5000 # model duration
+  t_f: 2000 #s 
+  delta_t: 0.1
+  w1: 0.1 # weight
+  w2: 0.1 # weight
+  setpoint_y1: 18.0
+  setpoint_y2: 15.0
+  umin: 10.0
+  umax: 300
+  plant_max_step: 0.1
